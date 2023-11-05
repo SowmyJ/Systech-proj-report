@@ -1,0 +1,55 @@
+/* Style for the whole container */
+div {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  /* Style for the file input and button */
+  input[type="file"],
+  button {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the extracted data sections */
+  .extracted-section {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style for the section headers */
+  .extracted-section h2 {
+    font-size: 18px;
+    margin-top: 0;
+  }
+  
+  /* Style for the tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  /* Style for table headers */
+  th {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ccc; /* Add vertical and horizontal lines to headers */
+  }
+  
+  /* Style for table cells */
+  td {
+    border: 1px solid #ccc; /* Add vertical and horizontal lines to cells */
+    padding: 8px;
+    background-color: #f2f2f2; /* Cell background color */
+  }
+  
+  /* Hover effect for table rows */
+  tr:hover {
+    background-color: #ddd;
+  }
+  
