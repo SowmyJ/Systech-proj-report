@@ -1,0 +1,232 @@
+
+body
+{
+  margin:0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.img-fluid
+{
+  margin-top: 5px;
+  margin-left: 5px;
+  width:25%;
+}
+
+
+.table{
+  border-width: 10px;
+  border-bottom: 15px;
+}
+
+/* Tab Container */
+.tab-container {
+
+   max-width: auto; /* Adjust as needed */
+  margin: 0 auto;
+  margin-top:10px;
+}
+
+/* Tab Buttons Container */
+.tab-buttons {
+  display: flex;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  justify-content: space-evenly; /* Adjust as needed */
+}
+
+/* Tab Buttons */
+.tab-button {
+  padding: 15px 20px;
+  text-align: center;
+  background-color:#84BD00;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: 1px solid #ccc;
+  border-bottom: none; /* Remove the bottom border for the last tab */
+}
+
+.tab-button:hover {
+  background-color: #080808;
+}
+.tab-button.active {
+  background-color: #004B8B ; /* Change the background color to indicate it's active */
+  color: #fff;}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  padding: 20px;
+  background-color: #fff;
+} 
+ 
+
+/* Make the first tab active by default
+.tab-button:first-child {
+  background-color: #84BD00;
+  border-top: 1px solid #ccc;
+}
+
+.tab-button:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.tab-content:first-child {
+  display: block;
+} */
+
+/* Table Styles */
+
+.blue-color
+{
+color: #004B8B;
+
+}
+.grey-color
+{
+  color:#394a56;
+}
+
+#status-container{
+  margin-top: 0px;
+  padding: 4px;
+  width: 100%;
+  display: block;
+  color: White;
+  text-align: center;
+  padding:5px 0px;
+  box-shadow: 0px 1px 5px 1px #004B8B; 
+}
+#status-container-2{
+  margin-top: 10px;
+  padding: 4px;
+  width: 100%;
+  display: block;
+  color: White;
+  text-align: center;
+  padding:5px 0px;
+  box-shadow: 0px 1px 5px 1px #000; 
+  border-radius:5px;
+  background-color:#333;
+}
+
+.professional-list {
+  list-style-type:none; /* Use disc bullets */
+  margin-left: 5px; /* Add left margin for better readability */
+  padding: 0; /* Remove default padding */
+}
+
+.professional-list li {
+  margin: 0 5px; /* Add spacing between list items */
+  border-bottom: 1px solid #ccc; /* Add a border at the bottom of each li */
+    padding: 10px 2px; /* Add vertical spacing */
+    background-color: #f2f2f2;
+   
+}
+h3
+{
+  padding:7px 0px;
+  box-shadow: 0px 1px 5px 1px #004B8B;
+  padding-left: 5px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.table-column {
+  width: 50%; /* Adjust the width to leave some space for margins */
+  border: 1px solid #ccc; /* Add a border around each column */
+  padding: 10px;
+  margin-bottom:15px;
+}
+.td-left
+{
+  background-color: #333;
+color: #fff;
+text-align: left;
+padding: 5px;
+border: 1px solid #000;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+border-spacing: 0;
+margin-top:15px;
+margin-bottom: 20px;
+}
+
+/* Table Header Styles */
+th {
+
+background-color: #333;
+color: #fff;
+text-align: left;
+padding: 12px;
+border: 1px solid #000; /* Add borders to header cells */
+}
+
+/* Table Row Styles */
+tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+/* Table Cell Styles */
+td {
+padding: 10px;
+border: 1px solid #000; /* Add borders to data cells */
+}
+
+/* Hover Effect */
+tr:hover {
+background-color: #ddd;
+}
+
+/* Responsive Table */
+@media (max-width: 600px) {
+table {
+  font-size: 12px;
+}
+th, td {
+  padding: 8px;
+}
+}
+.projectstatus {
+  display: flex;
+ 
+}
+
+.left-column, .right-column {
+  width: 50%; /* Adjust the width as needed, leaving some space for margins */
+}
+
+/* Optional: Add styling for the individual elements */
+.left-column h3 {
+  font-size: 18px;
+  color: #333333;
+}
+
+.right-column p {
+  font-size: 18px;
+  color: #ec0808;
+}
+.body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+main {
+  flex: 1;
+  padding:80%;
+}
+footer {
+  background-color:#394A56;
+  color: #fff;
+  padding: 10px;
+  position:fixed;
+  text-align: center;
+  /* position: fixed; */
+  bottom: 0;
+  width: 100%;
+}
