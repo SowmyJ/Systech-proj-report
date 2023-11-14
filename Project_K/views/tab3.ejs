@@ -1,0 +1,193 @@
+<!-- views/index.ejs -->
+<!-- <html>
+<head>
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body> -->
+    <h1 class="blue-color">UNISERIES</h1>
+    <hr>
+    <div class="projectstatus">
+    <div class="left-column"><h3 class="blue-color " style=>PROJECT STATUS</h3></div>
+    <div class="right-column">
+        <p id="status-container" style="background-color: <%= projectData.ProjectStatus === 'completed' ? 'green' : 'red' %>;"><%= projectData.ProjectStatus %></span></p>
+    </div>
+    <!-- <p>PROJECT STATUS : <id="status-container"><%= projectData.ProjectStatus %></id></p> -->
+    <!-- <p class="grey-color" style="font-size: 20px">PROJECT STATUS <span id="status-container" style="background-color: <%= projectData.ProjectStatus === 'completed' ? 'green' : 'red' %>;"><%= projectData.ProjectStatus %></span></p> -->
+    </div>
+    <hr>
+    <div>
+        <h3 class="blue-color">PROJECT DESCRIPTION</h3>
+        <ul class="professional-list">
+            <% projectData.Project_descripton.forEach(description => { %>
+                <li><%= description %>
+              <% }); %>
+        </ul>
+        <!-- <p>Current Stage : <%= projectData.CurrentStage %></p>
+        <p>ReportDate : <%= projectData.ReportDate %></p>
+        <p>Release Version : <%= projectData.Release_version %></p>
+        <p>Next Milestone : <%= projectData.Next_milestone %></p> -->
+
+        <div class="table-container">
+            <div class="table-column">
+                <table>
+                    <tr>
+                        <td class="td-left">Current Stage</td>
+                        <td><%= projectData.CurrentStage %></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left">Report Date</td>
+                        <td><%= projectData.ReportDate %></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-column">
+                <table>
+                    <tr>
+                        <td class="td-left">Release Version</td>
+                        <td><%= projectData.Release_version %></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left">Next Milestone</td>
+                        <td><%= projectData.Next_milestone %></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- Display Release Details Data -->
+    <h3 class="blue-color">RELEASE DETAILS</h3>
+    <table>
+     <tr>
+         <% projectData.Release_details_columns.forEach(column => { %>
+          <th><%= column %></th>
+         <% }); %>
+    </tr>
+    <% projectData.Release_details_data.forEach(row => { %>
+    <tr>
+        <td ><span style="color: #004B8B; font-weight: bold;"><%= row.ENVIRONMENT %></span></td>
+        <td ><%= row.STATUS %></td>
+        <td ><%= row["PLANNED RELEASE DATE"] %></td>
+        <td ><%= row["ACTUAL RELEASE DATE"] %></td>
+    </tr>
+    <% }); %>
+    </table>
+    </div>
+    <div>
+        <h3 class="blue-color">HIGHLIGHTS</h3>
+        <ul class="professional-list">
+            <% projectData.Highlights.forEach(highlight => { %>
+                <li><%= highlight %>
+              <% }); %>
+        </ul>
+    </div>
+    <div>
+        <!-- Display Feature Status Data -->
+        <h3 class="blue-color">FEATURE STATUS</h3>
+        <table>
+            <tr>
+                <% projectData.Feature_status_columns.forEach(column => { %>
+                 <th><%= column %></th>
+                <% }); %>
+           </tr>
+           <% projectData.Feature_status_data.forEach(row => { %>
+           <tr>
+               <td><span style="color: #004B8B; font-weight: bold;"><%= row.Feature %></span></td>
+               <td><span id="status-container-2" style="color: <%= row.Status === 'Completed' ? 'green' : 'yellow' %>;"><%= row.Status %></span></td>
+               <td><%= row.Remarks %></td>
+           </tr>
+           <% }); %>
+           </table>
+    </div>
+    <div>
+        <!-- Display Risk Tracker Data -->
+        <h3 class="blue-color">RISK TRACKER</h3>
+        <table>
+            <tr>
+                <% projectData.Risk_tracker_columns.forEach(column => { %>
+                 <th><%= column %></th>
+                <% }); %>
+           </tr>
+           <% projectData.Risk_tracker_data.forEach(row => { %>
+           <tr>
+               <td><%= row.SL %></td>
+               <td><span style="color:red; font-weight: bold;"><%= row.Identified_Risk %></span></td>
+               <td><%= row.Status %></td>
+               <td><%= row.Severity %></td>
+               <td><%= row.Impact %></td>
+               <td><%= row.Mitigation %></td>
+               <td><%= row.Closure_required_by %></td>
+               <td><%= row.Owner %></td>
+           </tr>
+           <% }); %>
+           </table>
+    </div>
+    <div>
+        <!-- Display Defect Trend Data -->
+        <h3 class="blue-color">DEFECT TREND</h3>
+        <p><%= projectData.Defect_trend_descripton %></p>
+
+        <table>
+            <tr>
+                <% projectData.Defect_trend_table1_columns.forEach(column => { %>
+                 <th><%= column %></th>
+                <% }); %>
+           </tr>
+           <% projectData.Defect_trend_table1_data.forEach(row => { %>
+           <tr>
+               <td><span style="color: #004B8B; font-weight: bold;"><%= row.Feature %></span></td>
+               <td><%= row.Jira_ID %></td>
+               <td><%= row.Description %></td>
+               <td><%= row.Status %></td>
+               <td><%= row.DEV_Owner %></td>
+               <td><%= row.Severity %></td>
+               <td><%= row.ETA %></td>
+           </tr>
+           <% }); %>
+           </table>
+
+           <table>
+            <tr>
+                <% projectData.Defect_trend_table2_columns.forEach(column => { %>
+                 <th><%= column %></th>
+                <% }); %>
+           </tr>
+           <% projectData.Defect_trend_table2_data.forEach(row => { %>
+           <tr>
+               <td><%= row.Total_Defects %></td>
+               <td><%= row.Blocker %></td>
+               <td><%= row.Severe %></td>
+               <td><%= row.Moderate %></td>
+               <td><%= row.Minor %></td>
+           </tr>
+           <% }); %>
+           </table>
+
+    </div>
+    <div>
+        <!-- Display QA Test Execution Data -->
+        <h3 class="blue-color">QA TEST EXECUTION DATA</h3>
+        <table>
+            <tr>
+                <% projectData.QA_Test_Execution_status_columns.forEach(column => { %>
+                 <th><%= column %></th>
+                <% }); %>
+           </tr>
+           <% projectData.QA_Test_Execution_status_data.forEach(row => { %>
+           <tr>
+               <td><span style="color: #004B8B; font-weight: bold;"><%= row.Feature %></span></td>
+               <td><%= row.TotalTestCase %></td>
+               <td><%= row.Executed %></td>
+               <td><%= row.Pass %></td>
+               <td><%= row.Fail %></td>
+               <td><span id="status-container-2" style="background-color: <%= row.Remarks === 'Completed' ? 'green' : 'red' %>;"><%= row.Remarks %></span></td>
+           </tr>
+           <% }); %>
+           </table>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+<!-- </body>
+</html> -->
