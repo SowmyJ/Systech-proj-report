@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Table Form</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dynamic Table Form</h1>
+
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" name="name" placeholder="Enter Name" required></td>
+        <td><input type="number" name="age" placeholder="Enter Age" required></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" onclick="addEntry()">Add Entry</button>
+
+  <script>
+    function addEntry() {
+      // Get form data
+      var name = document.getElementsByName('name')[0].value;
+      var age = document.getElementsByName('age')[0].value;
+
+      // Validate form data
+      if (!name || !age) {
+        alert('Please enter both name and age.');
+        return;
+      }
+
+      // Create a new table row
+      var table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+      var newRow = table.insertRow(table.rows.length);
+      var cell1 = newRow.insertCell(0);
+      var cell2 = newRow.insertCell(1);
+
+      // Populate the table row with form data
+      cell1.innerHTML = name;
+      cell2.innerHTML = age;
+
+      // Clear the form inputs
+      document.getElementsByName('name')[0].value = '';
+      document.getElementsByName('age')[0].value = '';
+    }
+  </script>
+
+</body>
+</html>

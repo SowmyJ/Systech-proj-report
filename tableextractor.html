@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Table Extractor</title>
+</head>
+<body>
+  <input type="file" id="excelFileInput" accept=".xlsx">
+  <button onclick="extractTableData()">Extract Table Data</button>
+  <div id="tableDataContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+  <script>
+    async function extractTableData() {
+      const fileInput = document.getElementById('excelFileInput');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = async function (e) {
+          const arrayBuffer = e.target.result;
+          const workbook = new ExcelJS.Workbook();
+
+          try {
+            await workbook.xlsx.load(arrayBuffer);
+
+            // Assuming the table is on the first sheet
+            const worksheet = workbook.getWorksheet(1);
+
+            // Replace 'YourTableName' with the actual name of your table
+            const tableName = 'Release_details';
+            const table = worksheet.tables.find(t => t.name === tableName);
+
+            if (table) {
+              // Get the data body range of the tabxle
+              const tableRange = table.getSheet().getRange(table.address);
+
+              // Extract data from the table
+              const tableData = [];
+              tableRange.eachCell({ includeEmpty: false }, (cell, rowNumber, colNumber) => {
+                if (!tableData[rowNumber]) {
+                  tableData[rowNumber] = [];
+                }
+                tableData[rowNumber][colNumber] = cell.value;
+              });
+
+              // Display the table data in HTML
+              displayTableData(tableData);
+            } else {
+              console.log(`Table "${tableName}" not found.`);
+            }
+          } catch (error) {
+            console.error('Error:', error.message);
+          }
+        };
+
+        reader.readAsArrayBuffer(file);
+      } else {
+        console.log('Please select an Excel file.');
+      }
+    }
+
+    function displayTableData(tableData) {
+      const tableDataContainer = document.getElementById('tableDataContainer');
+      tableDataContainer.innerHTML = ''; // Clear previous content
+
+      const tableElement = document.createElement('table');
+      tableElement.border = '1';
+
+      tableData.forEach(rowData => {
+        const rowElement = document.createElement('tr');
+
+        rowData.forEach(cellData => {
+          const cellElement = document.createElement('td');
+          cellElement.textContent = cellData;
+          rowElement.appendChild(cellElement);
+        });
+
+        tableElement.appendChild(rowElement);
+      });
+
+      tableDataContainer.appendChild(tableElement);
+    }
+  </script>
+</body>
+</html>

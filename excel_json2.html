@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to JSON Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <input type="file" id="fileInput" />
+    <button onclick="convertExcelToJson()">Convert to JSON</button>
+
+    <pre id="jsonOutput"></pre>
+
+    <script>
+        function convertExcelToJson() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var data = new Uint8Array(e.target.result);
+                    var workbook = XLSX.read(data, { type: 'array' });
+
+                    var jsonData = {};
+
+                    workbook.SheetNames.forEach(function (sheetName) {
+                        var sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 , defval: '',});
+
+                        if (sheetData.length > 0) {
+                            var currentColumns = sheetData[0].map(column => column.trim());
+                            var currentTable = [];
+                            var currentSection = null;
+
+                            sheetData.forEach(function (row) {
+                                // Check if the row is a section header
+                                if (row.length === 1 && row[0]) {
+                                    currentSection = row[0].trim().replace(/\s+/g, '_').toLowerCase();
+                                    currentTable = [];
+                                } else {
+                                    // Convert each row to an object
+                                    var rowData = {};
+                                    row.forEach(function (value, index) {
+                                        rowData[currentColumns[index]] = value;
+                                    });
+
+                                    currentTable.push(rowData);
+                                }
+                            });
+
+                            // Assign tables to sheet
+                            jsonData[currentSection + '_columns'] = currentColumns;
+                            jsonData[currentSection + '_data'] = currentTable;
+                        }
+                    });
+
+                    // Display the JSON data in the <pre> element
+                    document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
+                };
+
+                reader.readAsArrayBuffer(file);
+            } else {
+                console.error('Please select an Excel file.');
+            }
+        }
+    </script>
+
+</body>
+</html>

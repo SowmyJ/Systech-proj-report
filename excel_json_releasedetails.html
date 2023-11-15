@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to JSON Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <input type="file" id="fileInput" />
+    <button onclick="convertExcelToJson()">Convert to JSON</button>
+
+    <pre id="jsonOutput"></pre>
+
+    <script>
+        function convertExcelToJson() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var data = new Uint8Array(e.target.result);
+                    var workbook = XLSX.read(data, { type: 'array' });
+
+                    var releaseDetailsColumns = [];
+                    var releaseDetailsData = [];
+
+                    workbook.SheetNames.forEach(function (sheetName) {
+                        var sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
+
+                        if (sheetData.length > 0) {
+                            // Assuming the first row contains column headers
+                            releaseDetailsColumns = sheetData[0].map(column => column.trim());
+
+                            // Remove the header row
+                            sheetData.shift();
+
+                            // Convert each row to an object
+                            sheetData.forEach(function (row) {
+                                var rowData = {};
+                                row.forEach(function (value, index) {
+                                    rowData[releaseDetailsColumns[index]] = value;
+                                });
+                                releaseDetailsData.push(rowData);
+                            });
+                        }
+                    });
+
+                    // Construct the final JSON object
+                    var finalJson = {
+                        "Release_details_columns": releaseDetailsColumns,
+                        "Release_details_data": releaseDetailsData
+                    };
+
+                    // Display the JSON data in the <pre> element
+                    document.getElementById('jsonOutput').textContent = JSON.stringify(finalJson, null, 2);
+                };
+
+                reader.readAsArrayBuffer(file);
+            } else {
+                console.error('Please select an Excel file.');
+            }
+        }
+    </script>
+
+</body>
+</html>
